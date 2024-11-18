@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호관명 및 호수 검색</title>
+</head>
+<body>
+    <h1>호관명 및 호수 검색</h1>
+    <form action="/search" method="GET">
+        <label for="호관명">호관명:</label>
+        <input type="text" id="호관명" name="호관명" required>
+        <br>
+        <label for="호수">호수:</label>
+        <input type="text" id="호수" name="호수" required>
+        <br>
+        <button type="submit">검색</button>
+    </form>
+
+    {% if results %}
+        <h2>검색 결과</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>강의실명</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                    <tr>
+                        <td>{{ row['강의실명'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
