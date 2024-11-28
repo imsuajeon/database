@@ -16,12 +16,13 @@ def search():
     conn = sqlite3.connect(DB_FILENAME)
     cursor = conn.cursor()
     
+    # LIKE 쿼리 사용
     query = """
     SELECT 학수번호, 건물, 강의실, 시간, 교과목, 종류 
     FROM 편람
-    WHERE 교과목 = ?
+    WHERE 교과목 LIKE ?
     """
-    cursor.execute(query, (subject,))
+    cursor.execute(query, (f"%{subject}%",))  # 와일드카드 사용
     results = cursor.fetchall()
     conn.close()
     
