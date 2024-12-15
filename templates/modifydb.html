@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수업 관리</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        h1 {
+            color: #00509e;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>수업 관리 시스템</h1>
+
+    <!-- 수업 추가 -->
+    <div class="form-container">
+        <h2>수업 추가</h2>
+        <form action="/insert" method="POST">
+            <input type="text" name="학수번호" placeholder="학수번호" required><br>
+            <input type="text" name="건물" placeholder="건물" required><br>
+            <input type="text" name="강의실" placeholder="강의실" required><br>
+            <input type="text" name="교과목" placeholder="교과목" required><br>
+            <input type="text" name="시간" placeholder="시간" required><br>
+            <input type="text" name="종류" placeholder="종류" required><br>
+            <input type="submit" value="수업 추가">
+        </form>
+    </div>
+
+    <!-- 수업 삭제 -->
+    <div class="form-container">
+        <h2>수업 삭제</h2>
+        <form action="/delete" method="POST">
+            <input type="text" name="건물" placeholder="건물" required><br>
+            <input type="text" name="강의실" placeholder="강의실" required><br>
+            <input type="text" name="시간" placeholder="시간" required><br>
+            <input type="text" name="교과목" placeholder="교과목" required><br>
+            <input type="submit" value="수업 삭제">
+        </form>
+    </div>
+
+    <!-- 수업 수정 -->
+    <div class="form-container">
+        <h2>수업 수정</h2>
+        <form action="/update" method="POST">
+            <input type="text" name="학수번호" placeholder="학수번호" required><br>
+            <input type="text" name="건물" placeholder="건물" required><br>
+            <input type="text" name="강의실" placeholder="강의실" required><br>
+            <input type="text" name="시간" placeholder="시간" required><br>
+            <input type="text" name="교과목" placeholder="교과목" required><br>
+            <input type="text" name="종류" placeholder="종류" required><br>
+            <input type="submit" value="수업 수정">
+        </form>
+    </div>
+
+</body>
+</html>
