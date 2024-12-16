@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수업 추가</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #00509e;
+            margin-top: 30px;
+            font-size: 32px;
+        }
+
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 93%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #00509e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #003f7d;
+        }
+
+        .btn-secondary {
+            padding: 12px 20px;
+            background-color: #888;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #666;
+        }
+
+        hr {
+            width: 80%;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Flash 메시지 표시 -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+            <script>
+                // Flash 메시지가 성공이면 팝업창 표시
+                if ("{{ category }}" == "success") {
+                    alert("성공적으로 처리되었습니다: {{ message }}");
+                }
+                // Flash 메시지가 오류이면 알림
+                if ("{{ category }}" == "error") {
+                    alert("오류 발생: {{ message }}");
+                }
+            </script>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
+
+    <h1>수업 추가</h1>
+    <form action="{{ url_for('insert') }}" method="POST">
+        <input type="text" name="학수번호" placeholder="학수번호" required>
+        <input type="text" name="건물" placeholder="건물" required>
+        <input type="text" name="강의실" placeholder="강의실" required>
+        <input type="text" name="교과목" placeholder="교과목" required>
+        <input type="text" name="시간" placeholder="시간" required>
+        <input type="text" name="종류" placeholder="종류" required>
+        <button type="submit">수업 추가</button>
+    </form>    
+    <hr>
+    <a href="/db-management" style="text-decoration: none;">
+        <button class="btn-secondary">수업 관리 페이지로 돌아가기</button>
+    </a>
+</body>
+</html>
