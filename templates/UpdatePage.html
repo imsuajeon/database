@@ -115,7 +115,7 @@
 {% endwith %}
 
     <h1>수업 수정</h1>
-    <form action="{{ url_for('update') }}" method="POST">
+    <form id="update" action="{{ url_for('update') }}" method="POST">
         <div class="form-column">
             <h3>기존 수업 정보</h3>
             <input type="text" name="기존_학수번호" placeholder="기존 학수번호" required>

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>강의실 상태 조회</title>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,7 +59,29 @@
             background-color: #003f7d;
         }
 
-        .map-container {
+        hr {
+            width: 80%;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        .btn-secondary {
+            padding: 12px 20px;
+            background-color: #888;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #666;
+        }
+
+
+    .map-container {
             position: relative;
             width: 800px;
             margin: 20px auto;
@@ -107,9 +128,14 @@
             text-align: center;
             margin: 20px;
         }
-    </style>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 95%;
+            max-width: 400px;
+        }
+    </style>
 </head>
 <body>
     <h1>강의실 상태 조회</h1>
@@ -117,8 +143,15 @@
     <form method="POST">
         <input type="text" name="location" placeholder="건물-강의실 (예: 7-311)" required>
         <input type="text" name="time" placeholder="시간 입력 (예: 요일(교시))">
-        <button type="submit">조회</button>
+        <div class="button-container">
+            <button type="submit">조회</button>
+            <a href="/db-management" style="text-decoration: none;">
+                <button class="btn-secondary" type="button">수업 관리 페이지로 이동</button>
+            </a>
+        </div>
     </form>
+
+    <hr>
 
     <div class="map-container">
         <img src="{{ url_for('static', filename='SH_3_map.png') }}" alt="도면 이미지" style="width: 70%; height: auto;">
@@ -146,7 +179,9 @@
         <div id="room-7-314" class="highlight"></div>
     </div>
 
+
     <h2 class="result-message">검색 결과:</h2>
+
     <table>
         <thead>
             <tr>
@@ -158,7 +193,7 @@
             </tr>
         </thead>
         <tbody>
-            {% if rooms %}
+            {% if rooms and rooms|length > 0 %}
                 {% for room in rooms %}
                 <tr>
                     <td>{{ room.building }}</td>
@@ -175,7 +210,6 @@
             {% endif %}
         </tbody>
     </table>
-
     <!-- JavaScript -->
     <script>
         const searchedRoom = "{{ searched_room }}";
