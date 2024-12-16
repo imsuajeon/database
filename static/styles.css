@@ -1,0 +1,35 @@
+.map-container {
+    position: relative;
+    width: 800px; /* 이미지의 너비에 맞춤 */
+    margin: 20px auto;
+}
+
+.highlight {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.5); /* 반투명 빨간색 */
+    border: 2px solid red;
+    border-radius: 5px;
+    display: none;
+}
+
+#room-7-329 { top: 0%; left: 0%; width: 7%; height: 10%; }
+#room-7-330 { top: 0%; left: 7%; width: 7%; height: 10%; }
+#room-7-301 { top: 0%; left: 25%; width: 7%; height: 10%; }
+#room-7-302 { top: 0%; left: 32%; width: 13%; height: 10%; }
+#room-7-303 { top: 0%; left: 45%; width: 3%; height: 10%; }
+
+#room-7-306 { top: 22%; left: 25%; width: 13%; height: 10%; }
+#room-7-305 { top: 22%; left: 39%; width: 13%; height: 10%; }
+#room-7-304 { top: 0%; left: 61%; width: 9%; height: 32%; }
+
+#room-7-309 { top: 67%; left: 25%; width: 8%; height: 10%; }
+#room-7-310 { top: 67%; left: 33%; width: 3%; height: 10%; }
+#room-7-311 { top: 67%; left: 36%; width: 10%; height: 10%; }
+#room-7-312 { top: 67%; left: 46%; width: 6%; height: 10%; }
+#room-7-313 { top: 67%; left: 57%; width: 12%; height: 10%; }
+
+#room-7-319 { bottom: 1%; left: 0%; width: 7%; height: 10%; }
+#room-7-318 { bottom: 1%; left: 7%; width: 7%; height: 10%; }
+#room-7-317 { bottom: 1%; left: 24%; width: 13%; height: 10%; }
+#room-7-316 { bottom: 1%; left: 37%; width: 11%; height: 10%; }
+#room-7-314 { bottom: 1%; left: 59%; width: 10%; height: 10%; }
