@@ -24,15 +24,69 @@
             padding: 10px;
             margin: 5px;
         }
+
+        .flash-message {
+            margin: 20px auto;
+            padding: 10px;
+            color: white;
+            background-color: #28a745;
+            border-radius: 5px;
+            max-width: 400px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #00509e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #003f7d;
+        }
+
+        .btn-secondary {
+            padding: 10px 20px;
+            background-color: #888;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #666;
+        }
     </style>
 </head>
 <body>
     <h1>수업 관리 시스템</h1>
+    <hr>
+    <div style="text-align: center;">
+        <a href="/" style="text-decoration: none;">
+            <button class="btn-secondary">검색 페이지로 이동</button>
+        </a>
+    </div>
+    <hr>
+
+    <!-- Flash 메시지 표시 -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
 
     <!-- 수업 추가 -->
     <div class="form-container">
         <h2>수업 추가</h2>
-        <form action="/insert" method="POST">
+        <form action="{{ url_for('insert') }}" method="POST">
             <input type="text" name="학수번호" placeholder="학수번호" required><br>
             <input type="text" name="건물" placeholder="건물" required><br>
             <input type="text" name="강의실" placeholder="강의실" required><br>
@@ -47,10 +101,12 @@
     <div class="form-container">
         <h2>수업 삭제</h2>
         <form action="/delete" method="POST">
+            <input type="text" name="학수번호" placeholder="학수번호" required><br>
             <input type="text" name="건물" placeholder="건물" required><br>
             <input type="text" name="강의실" placeholder="강의실" required><br>
             <input type="text" name="시간" placeholder="시간" required><br>
             <input type="text" name="교과목" placeholder="교과목" required><br>
+            <input type="text" name="종류" placeholder="종류" required><br>
             <input type="submit" value="수업 삭제">
         </form>
     </div>
@@ -59,15 +115,25 @@
     <div class="form-container">
         <h2>수업 수정</h2>
         <form action="/update" method="POST">
-            <input type="text" name="학수번호" placeholder="학수번호" required><br>
-            <input type="text" name="건물" placeholder="건물" required><br>
-            <input type="text" name="강의실" placeholder="강의실" required><br>
-            <input type="text" name="시간" placeholder="시간" required><br>
-            <input type="text" name="교과목" placeholder="교과목" required><br>
-            <input type="text" name="종류" placeholder="종류" required><br>
+            <h3>기존 수업 정보</h3>
+            <input type="text" name="기존_학수번호" placeholder="기존 학수번호" required><br>
+            <input type="text" name="기존_건물" placeholder="기존 건물" required><br>
+            <input type="text" name="기존_강의실" placeholder="기존 강의실" required><br>
+            <input type="text" name="기존_시간" placeholder="기존 시간" required><br>
+            <input type="text" name="기존_교과목" placeholder="기존 교과목" required><br>
+            <input type="text" name="기존_종류" placeholder="기존 종류" required><br>
+
+            <hr>
+
+            <h3>새 수업 정보</h3>
+            <input type="text" name="새_학수번호" placeholder="새 학수번호" required><br>
+            <input type="text" name="새_건물" placeholder="새 건물" required><br>
+            <input type="text" name="새_강의실" placeholder="새 강의실" required><br>
+            <input type="text" name="새_시간" placeholder="새 시간" required><br>
+            <input type="text" name="새_교과목" placeholder="새 교과목" required><br>
+            <input type="text" name="새_종류" placeholder="새 종류" required><br>
             <input type="submit" value="수업 수정">
         </form>
     </div>
-
 </body>
 </html>

@@ -1,77 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>강의실 사용 여부</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의실 상태 조회</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f8ff; /* 밝은 파란색 배경 */
+            text-align: center;
+            background-color: #f0f8ff;
             color: #333;
         }
 
         h1 {
-            text-align: center;
-            color: #00509e; /* 진한 파란색 */
-        }
-
-        form {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 2px solid #00509e; /* 진한 파란색 테두리 */
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
             color: #00509e;
         }
 
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+        }
+
         input[type="text"] {
-            width: 95%;
+            width: 90%;
             padding: 10px;
-            margin-bottom: 15px;
+            margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 14px;
         }
 
         button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #00509e; /* 진한 파란색 */
+            padding: 10px 20px;
+            background-color: #00509e;
             color: white;
-            font-size: 16px;
-            font-weight: bold;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            margin: 10px 0;
         }
 
         button:hover {
-            background-color: #003f7d; /* 더 진한 파란색 */
-        }
-
-        hr {
-            margin: 20px 0;
-            border: 0;
-            border-top: 2px solid #00509e;
+            background-color: #003f7d;
         }
 
         table {
-            width: 80%;
             margin: 20px auto;
             border-collapse: collapse;
-            text-align: center;
-            background-color: white;
+            width: 90%;
+            max-width: 800px;
         }
 
         th, td {
@@ -85,35 +66,41 @@
         }
 
         tr:nth-child(even) {
-            background-color: #f0f8ff; /* 행 배경색 */
+            background-color: #f0f8ff;
         }
 
         tr:hover {
-            background-color: #e0f0ff; /* 호버 시 배경색 */
+            background-color: #e0f0ff;
         }
 
-        @media screen and (max-width: 768px) {
-            table {
-                width: 100%;
-            }
+        .btn-secondary {
+            padding: 10px 20px;
+            background-color: #888;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
 
-            form {
-                width: 90%;
-            }
+        .btn-secondary:hover {
+            background-color: #666;
         }
     </style>
 </head>
 <body>
     <h1>강의실 상태 조회</h1>
     <form method="POST">
-        <label for="location">건물-강의실 (예: 7-311):</label>
-        <input type="text" id="location" name="location" required>
-        <br>
-        <label for="time">시간 입력 (선택):</label>
-        <input type="text" id="time" name="time">
-        <br>
+        <input type="text" name="location" placeholder="건물-강의실 (예: 7-311)" required>
+        <input type="text" name="time" placeholder="시간 입력 (예: 09:00-10:00)">
         <button type="submit">조회</button>
     </form>
+    <hr>
+    <div style="text-align: center;">
+        <a href="/db-management" style="text-decoration: none;">
+            <button class="btn-secondary">수업 관리 페이지로 이동</button>
+        </a>
+    </div>
     <hr>
     <h2 style="text-align: center;">결과:</h2>
     <table>
@@ -124,15 +111,21 @@
             <th>교과목</th>
             <th>상태</th>
         </tr>
-        {% for room in rooms %}
-        <tr>
-            <td>{{ room.building }}</td>
-            <td>{{ room.room }}</td>
-            <td>{{ room.time }}</td>
-            <td>{{ room.subject }}</td>
-            <td>{{ room.status }}</td>
-        </tr>
-        {% endfor %}
+        {% if rooms and rooms|length > 0 %}
+            {% for room in rooms %}
+            <tr>
+                <td>{{ room.building }}</td>
+                <td>{{ room.room }}</td>
+                <td>{{ room.time }}</td>
+                <td>{{ room.subject }}</td>
+                <td>{{ room.status }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">검색된 결과가 없습니다.</td>
+            </tr>
+        {% endif %}
     </table>
 </body>
 </html>
